@@ -24,9 +24,10 @@ public class ImageUploadFragment extends Fragment {
         final Button uploadImageButton = (Button) rootView.findViewById(R.id.upload_image);
         final EditText imageCaptionEditText = (EditText) rootView.findViewById(R.id.caption_image);
         final EditText imageTagEditText = (EditText) rootView.findViewById(R.id.enter_tag_picture);
-        final EditText imageBuildingEditText = (EditText) rootView.findViewById(R.id.enter_building_picture);
-        final EditText imageFloorEditText = (EditText) rootView.findViewById(R.id.enter_floor_picture);
-        final EditText imageRoomEditText = (EditText) rootView.findViewById(R.id.enter_room_picture);
+        final EditText imageLocationEditText = (EditText) rootView.findViewById(R.id.image_upload_location);
+//        final EditText imageBuildingEditText = (EditText) rootView.findViewById(R.id.enter_building_picture);
+//        final EditText imageFloorEditText = (EditText) rootView.findViewById(R.id.enter_floor_picture);
+//        final EditText imageRoomEditText = (EditText) rootView.findViewById(R.id.enter_room_picture);
 
 //        final Button buildingButton = (Button) rootView.findViewById(R.id.building_button);
 //        final Button floorButton = (Button) rootView.findViewById(R.id.floor_button);
@@ -85,7 +86,7 @@ public class ImageUploadFragment extends Fragment {
                         firebase.child("title").setValue(imageTitleEditText.getText().toString());
                         firebase.child("imageCaption").setValue(imageCaptionEditText.getText().toString());
                         firebase.child("tags").setValue(imageTagEditText.getText().toString());
-                        firebase.child("location").setValue(imageBuildingEditText.getText().toString());
+                        firebase.child("location").setValue(imageLocationEditText.getText().toString());
                         firebase.child("image").setValue("thing");
                         firebase.child("storyText").setValue(null);
                     }

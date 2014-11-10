@@ -12,11 +12,11 @@ package grimwootier.com.olinadmissions;
 public class CustomList extends ArrayAdapter<String>{
     private final Activity context;
     private final ArrayList<String> title;
-    private final ArrayList<String> imageId;
+    private final ArrayList<Integer> imageId;
     private final ArrayList<String> location;
 
     public CustomList(Activity context,
-                      ArrayList<String> title, ArrayList<String> imageId, ArrayList<String> location) {
+                      ArrayList<String> title, ArrayList<Integer> imageId, ArrayList<String> location) {
         super(context, R.layout.story_list_single, title);
         this.context = context;
         this.title = title;

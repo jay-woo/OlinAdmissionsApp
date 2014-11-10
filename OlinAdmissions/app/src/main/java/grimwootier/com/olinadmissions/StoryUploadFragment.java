@@ -73,8 +73,8 @@ public class StoryUploadFragment extends Fragment {
                         firebase.child("storyText").setValue(storyTextEditText.getText().toString());
                         firebase.child("tags").setValue(storyTagEditText.getText().toString());
                         firebase.child("location").setValue(storyLocationEditText.getText().toString());
-                        firebase.child("image").setValue(null);
-                        firebase.child("imageCaption").setValue(null);
+                        firebase.child("image").setValue(" ");
+                        firebase.child("imageCaption").setValue(" ");
 
                     }
                 });

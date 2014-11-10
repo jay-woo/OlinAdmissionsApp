@@ -17,6 +17,7 @@ import com.firebase.client.ValueEventListener;
 import com.google.android.gms.plus.model.people.Person;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StoryList extends Fragment {
 
@@ -35,13 +36,19 @@ public class StoryList extends Fragment {
 
     ListView list;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_story_list, container, false);
+//        titleList.add("Thing");
+//        tagList.add("Thing");
+//        locationList.add("thing");
+//        storyTextList.add("thing");
+//        imageList.add("thing");
+//        captionList.add("thing");
+//        imageIdList.add(R.drawable.olin1);
+
 
         CustomList adapter = new CustomList(this.getActivity(), titleList, imageIdList, locationList);
 

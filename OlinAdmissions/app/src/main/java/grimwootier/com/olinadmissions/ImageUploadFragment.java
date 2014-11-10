@@ -87,8 +87,8 @@ public class ImageUploadFragment extends Fragment {
                         firebase.child("imageCaption").setValue(imageCaptionEditText.getText().toString());
                         firebase.child("tags").setValue(imageTagEditText.getText().toString());
                         firebase.child("location").setValue(imageLocationEditText.getText().toString());
-                        firebase.child("image").setValue("thing");
-                        firebase.child("storyText").setValue(null);
+                        firebase.child("image").setValue(" ");
+                        firebase.child("storyText").setValue(" ");
                     }
         });
 

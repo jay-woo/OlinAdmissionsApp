@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCFFFF"
+    tools:context="grimwootier.com.olinadmissions.SignupFragment">
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username_signup"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="Username"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:id="@+id/password_signup"
+        android:layout_below="@id/username_signup"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="Password"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstname_signup"
+        android:layout_below="@id/password_signup"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="First Name"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lastname_signup"
+        android:layout_below="@id/firstname_signup"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="Last Name"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/olinconnection_signup"
+        android:layout_below="@id/lastname_signup"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="Connection To Olin"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/signup_newAccount"
+        android:layout_below="@id/olinconnection_signup"
+        android:layout_marginTop="50dp"
+        android:text="Sign Up"/>
+
+</RelativeLayout>

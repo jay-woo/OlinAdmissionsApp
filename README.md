@@ -1,4 +1,4 @@
-OlinAdmissionsApp
-=================
+MobProto-Final
+==============
 
-An admissions app for Olin College (MobProto OSS)
+An admissions app for Olin College

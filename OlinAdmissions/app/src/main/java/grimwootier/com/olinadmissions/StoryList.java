@@ -113,7 +113,7 @@ public class StoryList extends Fragment {
                                     int position, long id) {
 
                 //if story, switch to story, if image switch to image
-                activity.switchFragment(new StoryViewFragment(titleList.get(position)), locationList.get(position)),storyTextList.get(position);
+                activity.switchFragment(new StoryViewFragment(titleList.get(position), locationList.get(position),storyTextList.get(position)));
             }
         });
 

@@ -18,8 +18,14 @@ import java.util.ArrayList;
 
 public class StoryViewFragment extends Fragment {
 
-    public StoryViewFragment (String title, String text, String location) {
+    private String title;
+    private String text;
+    private String location;
 
+    public StoryViewFragment (String title, String text, String location) {
+        this.title = title;
+        this.text = text;
+        this.location = location;
     }
 
     @Override
@@ -34,9 +40,9 @@ public class StoryViewFragment extends Fragment {
         final TextView storyLocation = (TextView) rootView.findViewById(R.id.story_view_location);
 
         //fill in textviews
-        storyTitle.setText();
-        storyText.setText();
-        storyLocation.setText();
+        storyTitle.setText(title);
+        storyText.setText(text);
+        storyLocation.setText(location);
 
         return rootView;
     }

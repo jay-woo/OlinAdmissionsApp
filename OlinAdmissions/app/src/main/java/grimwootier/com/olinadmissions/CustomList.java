@@ -7,14 +7,16 @@ package grimwootier.com.olinadmissions;
         import android.widget.ImageView;
         import android.widget.TextView;
 
+        import java.util.ArrayList;
+
 public class CustomList extends ArrayAdapter<String>{
     private final Activity context;
-    private final String[] title;
-    private final Integer[] imageId;
-    private final String[] location;
+    private final ArrayList<String> title;
+    private final ArrayList<String> imageId;
+    private final ArrayList<String> location;
 
     public CustomList(Activity context,
-                      String[] title, Integer[] imageId, String[] location) {
+                      ArrayList<String> title, ArrayList<String> imageId, ArrayList<String> location) {
         super(context, R.layout.story_list_single, title);
         this.context = context;
         this.title = title;
@@ -28,9 +30,9 @@ public class CustomList extends ArrayAdapter<String>{
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
         TextView txtLocation = (TextView) rowView.findViewById(R.id.loc);
-        txtTitle.setText(title[position]);
-        imageView.setImageResource(imageId[position]);
-        txtLocation.setText(location[position]);
+        txtTitle.setText(title.get(position));
+        imageView.setImageResource(imageId.get(position));
+        txtLocation.setText(location.get(position));
 
         return rowView;
     }

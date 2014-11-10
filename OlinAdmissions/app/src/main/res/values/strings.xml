@@ -12,6 +12,7 @@
     <string name="upload">Upload!</string>
     <string name="tag">Enter Tags Here</string>
 
+    <string name="location">Location</string>
     <string name="building_prompt">Building</string>
     <string name="floor_prompt">Floor</string>
     <string name="room_prompt">Room</string>

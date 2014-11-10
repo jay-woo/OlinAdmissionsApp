@@ -31,7 +31,7 @@ public class ImageUploadFragment extends Fragment {
 //        final Button buildingButton = (Button) rootView.findViewById(R.id.building_button);
 //        final Button floorButton = (Button) rootView.findViewById(R.id.floor_button);
 //        final Button roomButton = (Button) rootView.findViewById(R.id.room_button);
-//        final Firebase firebase = new Firebase("https://boiling-inferno-4244.firebaseio.com/");
+        final Firebase firebase = new Firebase("https://boiling-inferno-4244.firebaseio.com/");
 
         //Initialize firebase
 //        firebase.addValueEventListener(new ValueEventListener() {
@@ -79,18 +79,19 @@ public class ImageUploadFragment extends Fragment {
 //                    }
 //                });
 
-        //Upload button click
-//        uploadImageButton.setOnClickListener(
-//                new View.OnClickListener(){
-//                    public void onClick (View view) {
-//                        firebase.child("imageUploadTitle").setValue(imageTitleEditText.getText().toString());
-//                        firebase.child("imageUploadCaption").setValue(imageCaptionEditText.getText().toString());
-//                        firebase.child("imageUploadTags").setValue(imageTagEditText.getText().toString());
-//                        firebase.child("storyUploadBuilding").setValue(imageBuildingEditText.getText().toString());
-//                        firebase.child("storyUploadFloor").setValue(imageFloorEditText.getText().toString());
-//                        firebase.child("storyUploadRoom").setValue(imageRoomEditText.getText().toString());
-//                    }
-//        });
+        uploadImageButton.setOnClickListener(
+                new View.OnClickListener(){
+                    public void onClick (View view) {
+                        firebase.child("title").setValue(imageTitleEditText.getText().toString());
+                        firebase.child("imageCaption").setValue(imageCaptionEditText.getText().toString());
+                        firebase.child("tags").setValue(imageTagEditText.getText().toString());
+                        firebase.child("building").setValue(imageBuildingEditText.getText().toString());
+                        firebase.child("floor").setValue(imageFloorEditText.getText().toString());
+                        firebase.child("room").setValue(imageRoomEditText.getText().toString());
+                        firebase.child("image").setValue("thing");
+                        firebase.child("storyText").setValue(null);
+                    }
+        });
 
 
 

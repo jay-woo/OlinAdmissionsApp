@@ -25,6 +25,7 @@
         android:paddingLeft="20dp"
         android:paddingStart="20dp"
         android:paddingBottom="10dp"
+        android:textColor="#505050"
         android:layout_toRightOf="@+id/img"
         android:layout_below="@+id/txt"/>
 

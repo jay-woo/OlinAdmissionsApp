@@ -53,7 +53,7 @@ public class UploadHome extends Fragment {
                 new View.OnClickListener() {
                     public void onClick(View view) {
                         //switch to story fragment
-                        activity.switchFragment(new ImageUploadFragment());
+                        activity.switchFragment(new StoryUploadFragment());
                     }
                 });
 

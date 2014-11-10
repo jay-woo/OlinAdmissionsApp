@@ -19,23 +19,12 @@ import com.google.android.gms.plus.model.people.Person;
 import java.util.ArrayList;
 
 public class StoryList extends Fragment {
-
     MainActivity activity;
-
-    ArrayList<String> titleList = new ArrayList<String>();
-    ArrayList<String> tagList = new ArrayList<String>();
-    ArrayList<String> locationList = new ArrayList<String>();
-    ArrayList<String> storyTextList = new ArrayList<String>();
-    ArrayList<String> imageList= new ArrayList<String>();
-    ArrayList<String> captionList = new ArrayList<String>();
-    ArrayList<Integer> imageIdList = new ArrayList<Integer>();
+    ArrayList<Story> allStories = new ArrayList<Story>();
+    ListView list;
 
     public StoryList() {
     }
-
-    ListView list;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,66 +34,30 @@ public class StoryList extends Fragment {
 
         CustomList adapter = new CustomList(this.getActivity(), titleList, imageIdList, locationList);
 
-        final Firebase firebase = new Firebase("https://boiling-inferno-4244.firebaseio.com/");
+        final Firebase firebase = new Firebase("https://olinadmissionsapp.firebaseio.com/stories");
 
-
-        firebase.child("title").addValueEventListener(new ValueEventListener() {
+        firebase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                titleList.add(snapshot.getValue().toString());
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    String title = child.getKey();
+                    String location = child.child("location").getValue().toString();
+                    String story_text = child.child("story_text").getValue().toString();
+                    String date = child.child("date").getValue().toString();
+                    String image = child.child("image").getValue().toString();
+                    String image_caption = child.child("image_caption").getValue().toString();
+
+                    Story storyItem = new Story(title, location, story_text, date, image, image_caption);
+
+                    allStories.add(storyItem);
+                }
             }
-            @Override public void onCancelled(FirebaseError error) { }
-        });
 
-
-        firebase.child("tags").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                tagList.add(snapshot.getValue().toString());
+            public void onCancelled(FirebaseError firebaseError) {
+
             }
-            @Override public void onCancelled(FirebaseError error) { }
         });
-
-
-        firebase.child("location").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                locationList.add(snapshot.getValue().toString());
-            }
-            @Override public void onCancelled(FirebaseError error) { }
-        });
-
-
-        firebase.child("storyText").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                storyTextList.add(snapshot.getValue().toString());
-            }
-            @Override public void onCancelled(FirebaseError error) { }
-        });
-
-
-        firebase.child("image").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                imageList.add(snapshot.getValue().toString());
-            }
-            @Override public void onCancelled(FirebaseError error) { }
-        });
-
-
-        firebase.child("imageCaption").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                captionList.add(snapshot.getValue().toString());
-            }
-            @Override public void onCancelled(FirebaseError error) { }
-        });
-
-        for (int item = 0; item<titleList.size(); item = item+1);{
-            imageIdList.add(R.drawable.olin1);
-        }
-
 
         list=(ListView)rootView.findViewById(R.id.story_list);
         list.setAdapter(adapter);
@@ -114,7 +67,7 @@ public class StoryList extends Fragment {
                                     int position, long id) {
 
                 //if story, switch to story, if image switch to image
-                activity.switchFragment(new StoryViewFragment(titleList.get(position), locationList.get(position),storyTextList.get(position)));
+                activity.switchFragment(new StoryViewFragment(allStories.get(position)));
             }
         });
 

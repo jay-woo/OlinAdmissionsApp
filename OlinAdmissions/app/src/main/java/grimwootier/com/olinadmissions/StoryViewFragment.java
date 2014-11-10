@@ -5,21 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class StoryViewFragment extends Fragment {
 
+    private String title;
+    private String text;
+    private String location;
     public StoryViewFragment (String title, String text, String location) {
-
+        this.title = title;
+        this.text = text;
+        this.location = location;
     }
 
     @Override
@@ -34,9 +32,9 @@ public class StoryViewFragment extends Fragment {
         final TextView storyLocation = (TextView) rootView.findViewById(R.id.story_view_location);
 
         //fill in textviews
-        storyTitle.setText();
-        storyText.setText();
-        storyLocation.setText();
+        storyTitle.setText(title);
+        storyText.setText(text);
+        storyLocation.setText(location);
 
         return rootView;
     }

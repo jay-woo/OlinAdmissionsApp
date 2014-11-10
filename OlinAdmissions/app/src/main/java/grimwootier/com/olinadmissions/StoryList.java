@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.fasterxml.jackson.databind.deser.std.NumberDeserializers;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -27,7 +28,7 @@ public class StoryList extends Fragment {
     ArrayList<String> storyTextList = new ArrayList<String>();
     ArrayList<String> imageList= new ArrayList<String>();
     ArrayList<String> captionList = new ArrayList<String>();
-    ArrayList<String> imageIdList = new ArrayList<String>();
+    ArrayList<Integer> imageIdList = new ArrayList<Integer>();
 
     public StoryList() {
     }
@@ -101,7 +102,7 @@ public class StoryList extends Fragment {
         });
 
         for (int item = 0; item<titleList.size(); item = item+1);{
-            imageIdList.add("R.drawable.olin1");
+            imageIdList.add(R.drawable.olin1);
         }
 
 
@@ -113,7 +114,7 @@ public class StoryList extends Fragment {
                                     int position, long id) {
 
                 //if story, switch to story, if image switch to image
-                activity.switchFragment(new StoryViewFragment(titleList.get(position)), locationList.get(position)),storyTextList.get(position);
+                activity.switchFragment(new StoryViewFragment(titleList.get(position), locationList.get(position),storyTextList.get(position)));
             }
         });
 

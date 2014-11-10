@@ -24,9 +24,10 @@ public class StoryUploadFragment extends Fragment {
         final Button uploadStoryButton = (Button) rootView.findViewById(R.id.upload_story);
         final EditText storyTextEditText = (EditText) rootView.findViewById(R.id.story_text);
         final EditText storyTagEditText = (EditText) rootView.findViewById(R.id.enter_tag_story);
-        final EditText storyBuildingEditText = (EditText) rootView.findViewById(R.id.enter_building_story);
-        final EditText storyFloorEditText = (EditText) rootView.findViewById(R.id.enter_floor_story);
-        final EditText storyRoomEditText = (EditText) rootView.findViewById(R.id.enter_room_story);
+        final EditText storyLocationEditText = (EditText) rootView.findViewById(R.id.story_upload_location);
+//        final EditText storyBuildingEditText = (EditText) rootView.findViewById(R.id.enter_building_story);
+//        final EditText storyFloorEditText = (EditText) rootView.findViewById(R.id.enter_floor_story);
+//        final EditText storyRoomEditText = (EditText) rootView.findViewById(R.id.enter_room_story);
 
 //        final Button buildingButton = (Button) rootView.findViewById(R.id.building_button);
 //        final Button floorButton = (Button) rootView.findViewById(R.id.floor_button);
@@ -71,7 +72,7 @@ public class StoryUploadFragment extends Fragment {
                         firebase.child("title").setValue(storyTitleEditText.getText().toString());
                         firebase.child("storyText").setValue(storyTextEditText.getText().toString());
                         firebase.child("tags").setValue(storyTagEditText.getText().toString());
-                        firebase.child("location").setValue(storyBuildingEditText.getText().toString());
+                        firebase.child("location").setValue(storyLocationEditText.getText().toString());
                         firebase.child("image").setValue(null);
                         firebase.child("imageCaption").setValue(null);
 

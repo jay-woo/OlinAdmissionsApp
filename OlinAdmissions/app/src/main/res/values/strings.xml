@@ -15,6 +15,7 @@
     <string name="building_prompt">Building</string>
     <string name="floor_prompt">Floor</string>
     <string name="room_prompt">Room</string>
+    <string name="exit_button">EXIT</string>
 
 
     <string-array name="buildings_array">

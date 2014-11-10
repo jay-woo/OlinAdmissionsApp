@@ -12,9 +12,9 @@ public class TabMenu extends Fragment {
     public TabMenu() {
     }
 
-    ActionBar.Tab tab1, tab2, tab3;
+    ActionBar.Tab tab1, tab2;//, tab3;
+    //Fragment olinMap = new OlinMap();
     Fragment storyList = new StoryList();
-    Fragment olinMap = new StoryList();
     Fragment upload = new UploadHome();
 
     @Override
@@ -26,17 +26,17 @@ public class TabMenu extends Fragment {
         ActionBar actionBar = this.getActivity().getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        tab1 = actionBar.newTab().setText("MAP");
-        tab2 = actionBar.newTab().setText("LIST");
-        tab3 = actionBar.newTab().setText("UPLOAD");
+        //tab1 = actionBar.newTab().setText("MAP");
+        tab1 = actionBar.newTab().setText("STORIES");
+        tab2 = actionBar.newTab().setText("UPLOAD");
 
+        //tab1.setTabListener(new TabListener(olinMap));
         tab1.setTabListener(new TabListener(storyList));
-        tab2.setTabListener(new TabListener(olinMap));
-        tab3.setTabListener(new TabListener(upload));
+        tab2.setTabListener(new TabListener(upload));
 
+        //actionBar.addTab(tab1);
         actionBar.addTab(tab1);
         actionBar.addTab(tab2);
-        actionBar.addTab(tab3);
 
         return rootView;
     }

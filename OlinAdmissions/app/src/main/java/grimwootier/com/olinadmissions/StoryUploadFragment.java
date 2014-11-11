@@ -85,7 +85,7 @@ public class StoryUploadFragment extends Fragment {
                         newItemMap.put("date", "November");
 
                         firebase.child(storyTitleEditText.getText().toString()).setValue(newItemMap);
-                        activity.switchFragment(new UploadHome());
+                        activity.switchFragment(new TabMenu());
                     }
                 });
 

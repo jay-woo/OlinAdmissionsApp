@@ -17,6 +17,7 @@
     <string name="floor_prompt">Floor</string>
     <string name="room_prompt">Room</string>
     <string name="exit_button">EXIT</string>
+    <string name="back">BACK</string>
 
 
     <string-array name="buildings_array">

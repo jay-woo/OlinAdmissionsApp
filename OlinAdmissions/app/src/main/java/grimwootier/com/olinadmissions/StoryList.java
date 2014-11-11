@@ -1,8 +1,10 @@
 package grimwootier.com.olinadmissions;
 
+import android.app.Activity;
 import android.media.Image;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 public class StoryList extends Fragment {
     MainActivity activity;
     ArrayList<Story> allStories = new ArrayList<Story>();
+    ArrayList<String> allTitles = new ArrayList<String>();
     ListView list;
 
     public StoryList() {
@@ -32,7 +35,7 @@ public class StoryList extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_story_list, container, false);
 
-        CustomList adapter = new CustomList(this.getActivity(), titleList, imageIdList, locationList);
+        final CustomList adapter = new CustomList(this.getActivity(), allStories, allTitles);
 
         final Firebase firebase = new Firebase("https://olinadmissionsapp.firebaseio.com/stories");
 
@@ -41,15 +44,17 @@ public class StoryList extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     String title = child.getKey();
-                    String location = child.child("location").getValue().toString();
                     String story_text = child.child("story_text").getValue().toString();
                     String date = child.child("date").getValue().toString();
+                    String location = child.child("location").getValue().toString();
                     String image = child.child("image").getValue().toString();
                     String image_caption = child.child("image_caption").getValue().toString();
 
                     Story storyItem = new Story(title, location, story_text, date, image, image_caption);
 
                     allStories.add(storyItem);
+                    allTitles.add(title);
+                    adapter.notifyDataSetChanged();
                 }
             }
 
@@ -72,6 +77,12 @@ public class StoryList extends Fragment {
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        this.activity = (MainActivity) activity;
+        super.onAttach(activity);
     }
 }
 

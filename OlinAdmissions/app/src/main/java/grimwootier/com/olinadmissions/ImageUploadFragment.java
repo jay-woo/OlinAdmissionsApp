@@ -1,5 +1,6 @@
 package grimwootier.com.olinadmissions;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 public class ImageUploadFragment extends Fragment {
+    MainActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,12 +85,15 @@ public class ImageUploadFragment extends Fragment {
         uploadImageButton.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick (View view) {
-                        firebase.child("title").setValue(imageTitleEditText.getText().toString());
+                        firebase.setValue(imageTitleEditText.getText().toString());
                         firebase.child("imageCaption").setValue(imageCaptionEditText.getText().toString());
                         firebase.child("tags").setValue(imageTagEditText.getText().toString());
                         firebase.child("location").setValue(imageLocationEditText.getText().toString());
                         firebase.child("image").setValue("thing");
-                        firebase.child("storyText").setValue(null);
+                        firebase.child("storyText").setValue("N/A");
+                        firebase.child("date").setValue("November");
+
+                        activity.switchFragment(new UploadHome());
                     }
         });
 
@@ -98,4 +103,9 @@ public class ImageUploadFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        this.activity = (MainActivity) activity;
+        super.onAttach(activity);
+    }
 }

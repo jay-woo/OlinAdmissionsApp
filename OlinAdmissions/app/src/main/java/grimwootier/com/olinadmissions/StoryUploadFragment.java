@@ -1,5 +1,6 @@
 package grimwootier.com.olinadmissions;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +14,11 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class StoryUploadFragment extends Fragment {
+    MainActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,7 +37,7 @@ public class StoryUploadFragment extends Fragment {
 //        final Button buildingButton = (Button) rootView.findViewById(R.id.building_button);
 //        final Button floorButton = (Button) rootView.findViewById(R.id.floor_button);
 //        final Button roomButton = (Button) rootView.findViewById(R.id.room_button);
-        final Firebase firebase = new Firebase("https://olinadmissionsapp.firebaseio.com/");
+        final Firebase firebase = new Firebase("https://olinadmissionsapp.firebaseio.com/stories");
 
 //        //Building button click
 //        buildingButton.setOnClickListener(
@@ -69,13 +74,18 @@ public class StoryUploadFragment extends Fragment {
         uploadStoryButton.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick (View view) {
-                        firebase.child("title").setValue(storyTitleEditText.getText().toString());
-                        firebase.child("storyText").setValue(storyTextEditText.getText().toString());
-                        firebase.child("tags").setValue(storyTagEditText.getText().toString());
-                        firebase.child("location").setValue(storyLocationEditText.getText().toString());
-                        firebase.child("image").setValue(null);
-                        firebase.child("imageCaption").setValue(null);
+                        Map<String, String> newItemMap = new HashMap<String, String>();
+                        Map<String, Map<String, String>> newTitle = new HashMap<String, Map<String, String>>();
 
+                        newItemMap.put("story_text", storyTextEditText.getText().toString());
+                        newItemMap.put("tags", storyTagEditText.getText().toString());
+                        newItemMap.put("location", storyLocationEditText.getText().toString());
+                        newItemMap.put("image", "N/A");
+                        newItemMap.put("image_caption", "N/A");
+                        newItemMap.put("date", "November");
+
+                        firebase.child(storyTitleEditText.getText().toString()).setValue(newItemMap);
+                        activity.switchFragment(new UploadHome());
                     }
                 });
 
@@ -85,4 +95,9 @@ public class StoryUploadFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        this.activity = (MainActivity) activity;
+        super.onAttach(activity);
+    }
 }

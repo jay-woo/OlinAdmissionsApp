@@ -17,14 +17,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:textSize="20dp"
+        android:textSize="20sp"
         />
     <Button
         android:id="@+id/story_back_button"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_toEndOf="@+id/title_story_view"
         android:layout_toRightOf="@+id/title_story_view"
+        android:text="@string/back"
         />
     <TextView
         android:id="@+id/story_text_view"

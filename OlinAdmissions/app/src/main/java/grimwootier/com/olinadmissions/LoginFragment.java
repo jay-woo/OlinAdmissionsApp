@@ -80,6 +80,7 @@ public class LoginFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot child : dataSnapshot.getChildren()) {
+
                     String childUsername = child.getKey().toString();
                     String childPassword = child.child("password").getValue().toString();
                     String childFirstName = child.child("firstname").getValue().toString();

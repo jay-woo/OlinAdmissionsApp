@@ -32,7 +32,7 @@ public class StoryUploadFragment extends Fragment {
 //        final Button buildingButton = (Button) rootView.findViewById(R.id.building_button);
 //        final Button floorButton = (Button) rootView.findViewById(R.id.floor_button);
 //        final Button roomButton = (Button) rootView.findViewById(R.id.room_button);
-        final Firebase firebase = new Firebase("https://boiling-inferno-4244.firebaseio.com/");
+        final Firebase firebase = new Firebase("https://olinadmissionsapp.firebaseio.com/");
 
 //        //Building button click
 //        buildingButton.setOnClickListener(

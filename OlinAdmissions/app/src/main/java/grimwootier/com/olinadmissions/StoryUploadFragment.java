@@ -87,12 +87,14 @@ public class StoryUploadFragment extends Fragment {
 
                         firebase.child(storyTitleEditText.getText().toString()).setValue(newItemMap);
 
-                        for (Fragment activeFragment : activity.getActiveFragments()) {
-                            if (activeFragment instanceof UploadHome) {
-                                activity.switchFragment(activeFragment);
+                        getFragmentManager().popBackStack();
 
-                            }
-                        }
+//                        for (Fragment activeFragment : activity.getActiveFragments()) {
+//                            if (activeFragment instanceof UploadHome) {
+//                                activity.switchFragment(activeFragment);
+//
+//                            }
+//                        }
                     }
                 });
 

@@ -113,7 +113,8 @@ public class UploadHome extends Fragment {
                 // Image captured and saved to fileUri specified in the Intent
                 Toast.makeText(activity, "Image saved to:\n" +
                         fileUri.toString(), Toast.LENGTH_LONG).show();
-                activity.switchFragment(new ImageUploadFragment());
+                //activity.switchFragment(new ImageUploadFragment());
+                getFragmentManager().popBackStack();
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 // User cancelled the image capture
             } else {

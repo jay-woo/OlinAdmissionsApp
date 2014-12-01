@@ -93,12 +93,13 @@ public class ImageUploadFragment extends Fragment {
                         firebase.child("storyText").setValue("N/A");
                         firebase.child("date").setValue("November");
 
-                        activity.switchFragment(new UploadHome());
+                        for (Fragment activeFragment : activity.getActiveFragments()) {
+                            if (activeFragment instanceof UploadHome) {
+                                activity.switchFragment(activeFragment);
+                            }
+                        }
                     }
         });
-
-
-
 
         return rootView;
     }

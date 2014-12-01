@@ -37,11 +37,13 @@ public class MainActivity extends Activity {
     }
 
     public void switchFragment(Fragment fragment) {
-        activeFragments.add(fragment);
-
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+    }
+
+    public void addFragment(Fragment fragment) {
+        activeFragments.add(fragment);
     }
 
     public ArrayList<Fragment> getActiveFragments() {

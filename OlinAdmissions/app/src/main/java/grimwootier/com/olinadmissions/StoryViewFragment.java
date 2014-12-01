@@ -2,6 +2,7 @@ package grimwootier.com.olinadmissions;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,10 +41,10 @@ public class StoryViewFragment extends Fragment {
 
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                activity.switchFragment(new TabMenu());
+                //activity.switchFragment(new StoryList());
+                getFragmentManager().popBackStack();
             }
         });
-
 
         return rootView;
     }

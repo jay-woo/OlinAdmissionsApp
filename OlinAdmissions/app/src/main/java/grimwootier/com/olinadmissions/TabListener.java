@@ -13,7 +13,7 @@ public class TabListener implements ActionBar.TabListener {
     }
 
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        ft.replace(R.id.fragment_container, fragment);
+        ft.replace(R.id.tab_menu, fragment);
     }
 
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {

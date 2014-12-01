@@ -1,6 +1,7 @@
 package grimwootier.com.olinadmissions;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ public class TabMenu extends Fragment {
     //Fragment olinMap = new OlinMap();
     Fragment storyList = new StoryList();
     Fragment upload = new UploadHome();
+    MainActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +32,9 @@ public class TabMenu extends Fragment {
         tab1 = actionBar.newTab().setText("STORIES");
         tab2 = actionBar.newTab().setText("UPLOAD");
 
+        activity.addFragment(storyList);
+        activity.addFragment(upload);
+
         //tab1.setTabListener(new TabListener(olinMap));
         tab1.setTabListener(new TabListener(storyList));
         tab2.setTabListener(new TabListener(upload));
@@ -39,6 +44,11 @@ public class TabMenu extends Fragment {
         actionBar.addTab(tab2);
 
         return rootView;
+    }
+
+    public void onAttach(Activity activity) {
+        this.activity = (MainActivity) activity;
+        super.onAttach(activity);
     }
 }
 

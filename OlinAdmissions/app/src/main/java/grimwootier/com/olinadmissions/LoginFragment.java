@@ -55,7 +55,9 @@ public class LoginFragment extends Fragment {
                 for(Account item : accounts) {
                     if(item.get_username().equals(inputUsername) && item.get_password().equals(inputPassword)) {
                         authenticated = !authenticated;
-                        activity.switchFragment(new TabMenu());
+                        TabMenu tabMenu = new TabMenu();
+                        activity.addFragment(tabMenu);
+                        activity.switchFragment(tabMenu);
                         Log.i("DEBUGGING", "LOGGED IN");
                     }
                 }
@@ -70,7 +72,9 @@ public class LoginFragment extends Fragment {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.switchFragment(new SignupFragment());
+                SignupFragment signupFragment = new SignupFragment();
+                activity.addFragment(signupFragment);
+                activity.switchFragment(signupFragment);
             }
         });
 

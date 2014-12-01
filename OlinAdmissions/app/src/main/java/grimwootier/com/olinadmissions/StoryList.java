@@ -23,8 +23,8 @@ import java.util.Arrays;
 
 public class StoryList extends Fragment {
     MainActivity activity;
-    ArrayList<Story> allStories = new ArrayList<Story>();
-    ArrayList<String> allTitles = new ArrayList<String>();
+    ArrayList<Story> allStories;
+    ArrayList<String> allTitles;
     ListView list;
 
     public StoryList() {
@@ -44,6 +44,9 @@ public class StoryList extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    allStories = new ArrayList<Story>();
+                    allTitles = new ArrayList<String>();
+
                     String title = child.getKey();
                     String story_text = child.child("story_text").getValue().toString();
                     String date = child.child("date").getValue().toString();

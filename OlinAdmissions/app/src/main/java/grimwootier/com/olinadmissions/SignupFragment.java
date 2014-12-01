@@ -53,7 +53,9 @@ public class SignupFragment extends Fragment {
                 ref.child(acc_username).child("lastname").setValue(acc_lastname);
                 ref.child(acc_username).child("olinconnection").setValue(acc_olinconnection);
 
-                activity.switchFragment(new TabMenu());
+                TabMenu tabMenu = new TabMenu();
+                activity.addFragment(tabMenu);
+                activity.switchFragment(tabMenu);
             }
         });
 

@@ -82,6 +82,9 @@ public class ImageUploadFragment extends Fragment {
 //                    }
 //                });
 
+
+
+
         uploadImageButton.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick (View view) {

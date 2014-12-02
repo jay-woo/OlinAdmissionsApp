@@ -18,12 +18,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.android.AndroidAuthSession;
+import com.dropbox.client2.exception.DropboxException;
+import com.dropbox.client2.exception.DropboxUnlinkedException;
+import com.dropbox.client2.session.AppKeyPair;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UploadHome extends Fragment {
-
+    private DropboxAPI<AndroidAuthSession> mDBApi;//global variable
 
     private Uri fileUri;
 
@@ -35,6 +43,8 @@ public class UploadHome extends Fragment {
     public static final int RESULT_LOAD_IMAGE = 1;
 
     MainActivity activity;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +97,29 @@ public class UploadHome extends Fragment {
         return rootView;
     }
 
+
+    private void uploadToDropbox(String filepath) {
+        File tmpFile = new File(filepath);
+
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(tmpFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try { //TODO - Fix custom filename on Dropbox
+            mDBApi.putFileOverwrite(filepath, fis, tmpFile.length(), null);
+        } catch (DropboxException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public String createShareableUrl(String path)
+//            throws DropboxException
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && null != data) {
@@ -99,6 +132,7 @@ public class UploadHome extends Fragment {
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
+            uploadToDropbox(picturePath);
             cursor.close();
             activity.switchFragment(new ImageUploadFragment());
 
@@ -113,6 +147,8 @@ public class UploadHome extends Fragment {
                 // Image captured and saved to fileUri specified in the Intent
                 Toast.makeText(activity, "Image saved to:\n" +
                         fileUri.toString(), Toast.LENGTH_LONG).show();
+                Log.d("dropbox", "I uploaded");
+                uploadToDropbox(fileUri.toString());
                 activity.switchFragment(new ImageUploadFragment());
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 // User cancelled the image capture
@@ -142,5 +178,6 @@ public class UploadHome extends Fragment {
     public void onAttach(Activity activity) {
         this.activity = (MainActivity) activity;
         super.onAttach(activity);
+        mDBApi = new DropboxAPI<AndroidAuthSession>(new AndroidAuthSession(new AppKeyPair("nocof9bvdj3haef", "b8ap4ef5dyszb4t")));
     }
 }

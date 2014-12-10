@@ -1,39 +1,31 @@
 package grimwootier.com.olinadmissions;
 
+
+//import packages
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.style.UpdateLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.dropbox.client2.DropboxAPI;
-import com.dropbox.client2.android.AndroidAuthSession;
-import com.dropbox.client2.exception.DropboxException;
-import com.dropbox.client2.exception.DropboxUnlinkedException;
-import com.dropbox.client2.session.AppKeyPair;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 public class UploadHome extends Fragment {
-    private DropboxAPI<AndroidAuthSession> mDBApi;//global variable
 
-    private Uri fileUri;
+    //initialize variables
+
+    private Uri fileUri;   //filepath for pictures
 
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
@@ -57,8 +49,8 @@ public class UploadHome extends Fragment {
         final Button takePicButton = (Button) rootView.findViewById(R.id.take_picture_button);
         final Button uploadPicButton = (Button) rootView.findViewById(R.id.choose_picture_button);
 
-        //when the story button is pressed
 
+        //when the story button is pressed
         storyButton.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View view) {
@@ -74,8 +66,8 @@ public class UploadHome extends Fragment {
                         //switch to camera
                         // create Intent to take a picture and return control to the calling application
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-                        fileUri = MediaUtils.getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+                        fileUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".png"));
+//                        fileUri = MediaUtils.getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
                         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
@@ -98,30 +90,11 @@ public class UploadHome extends Fragment {
     }
 
 
-    private void uploadToDropbox(String filepath) {
-        File tmpFile = new File(filepath);
-
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(tmpFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try { //TODO - Fix custom filename on Dropbox
-            mDBApi.putFileOverwrite(filepath, fis, tmpFile.length(), null);
-        } catch (DropboxException e) {
-            e.printStackTrace();
-        }
-    }
-
-//    public String createShareableUrl(String path)
-//            throws DropboxException
-
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        CloudinaryStuff cloudinaryStuff = new CloudinaryStuff();
+//        CloudinaryApi cloudinaryApi = new CloudinaryApi();
+        CloudinaryAPIVolley cloudinaryAPIVolley = new CloudinaryAPIVolley();
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
@@ -132,7 +105,21 @@ public class UploadHome extends Fragment {
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
-            uploadToDropbox(picturePath);
+            try {
+                cloudinaryAPIVolley.UploadImages(picturePath, cloudinaryAPIVolley.getTimestamp());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+//            try {
+//                cloudinaryStuff.UploadImages(picturePath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            Log.d("cloudinary", "I AM UPLOADING");
+//            DropboxStuff.uploadToDropbox(picturePath);
+//            Log.d("dropbox", "I HAVE UPLOADED");
             cursor.close();
             activity.switchFragment(new ImageUploadFragment());
 
@@ -146,10 +133,11 @@ public class UploadHome extends Fragment {
             if (resultCode == Activity.RESULT_OK) {
                 // Image captured and saved to fileUri specified in the Intent
                 Toast.makeText(activity, "Image saved to:\n" +
-                        fileUri.toString(), Toast.LENGTH_LONG).show();
-                Log.d("dropbox", "I uploaded");
-                uploadToDropbox(fileUri.toString());
-                activity.switchFragment(new ImageUploadFragment());
+                        fileUri, Toast.LENGTH_LONG).show();
+//                Log.d("dropbox", "I AM uPLOADING");
+//                DropboxStuff.uploadToDropbox(fileUri.toString());
+//                Log.d("dropbox", "I UPLOADED");
+//                activity.switchFragment(new ImageUploadFragment());
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 // User cancelled the image capture
             } else {
@@ -178,6 +166,5 @@ public class UploadHome extends Fragment {
     public void onAttach(Activity activity) {
         this.activity = (MainActivity) activity;
         super.onAttach(activity);
-        mDBApi = new DropboxAPI<AndroidAuthSession>(new AndroidAuthSession(new AppKeyPair("nocof9bvdj3haef", "b8ap4ef5dyszb4t")));
     }
 }

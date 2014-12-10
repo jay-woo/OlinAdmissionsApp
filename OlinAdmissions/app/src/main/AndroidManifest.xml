@@ -16,18 +16,18 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.dropbox.client2.android.AuthActivity"
-            android:launchMode="singleTask"
-            android:configChanges="orientation|keyboard">
-            <intent-filter>
-                <!-- Change this to be db- followed by your app key -->
-                <data android:scheme="db-spij2af7altekut" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <!--<activity-->
+            <!--android:name="com.dropbox.client2.android.AuthActivity"-->
+            <!--android:launchMode="singleTask"-->
+            <!--android:configChanges="orientation|keyboard">-->
+            <!--<intent-filter>-->
+                <!--&lt;!&ndash; Change this to be db- followed by your app key &ndash;&gt;-->
+                <!--<data android:scheme="db-14wbjnl7yh35vsk" />-->
+                <!--<action android:name="android.intent.action.VIEW" />-->
+                <!--<category android:name="android.intent.category.BROWSABLE"/>-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -35,6 +35,8 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCkmwQv1eot-qfU52_1LY_e4gupjFGR1-Q"/>
     </application>
+
+    
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
